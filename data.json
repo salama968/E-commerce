@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with adjustable DPI and long battery life.",
+    "price": 29.99,
+    "category": "Electronics",
+    "stock": 50
+  },
+  {
+    "name": "Bluetooth Headphones",
+    "description": "Over-ear headphones with noise cancellation and 20-hour battery.",
+    "price": 79.99,
+    "category": "Electronics",
+    "stock": 30
+  },
+  {
+    "name": "Running Shoes",
+    "description": "Lightweight running shoes with breathable mesh and cushioned soles.",
+    "price": 59.99,
+    "category": "Footwear",
+    "stock": 25
+  },
+  {
+    "name": "Stainless Steel Water Bottle",
+    "description": "Insulated 500ml water bottle, keeps drinks cold for 24 hours.",
+    "price": 19.99,
+    "category": "Accessories",
+    "stock": 100
+  },
+  {
+    "name": "Gaming Keyboard",
+    "description": "Mechanical keyboard with RGB lighting and programmable keys.",
+    "price": 89.99,
+    "category": "Electronics",
+    "stock": 15
+  },
+  {
+    "name": "Yoga Mat",
+    "description": "Non-slip yoga mat with 6mm thickness for comfort during workouts.",
+    "price": 24.99,
+    "category": "Fitness",
+    "stock": 40
+  },
+  {
+    "name": "Backpack",
+    "description": "Water-resistant backpack with laptop compartment and multiple pockets.",
+    "price": 39.99,
+    "category": "Accessories",
+    "stock": 20
+  },
+  {
+    "name": "Smart Watch",
+    "description": "Fitness tracker with heart rate monitor and smartphone notifications.",
+    "price": 129.99,
+    "category": "Electronics",
+    "stock": 10
+  },
+  {
+    "name": "Ceramic Coffee Mug",
+    "description": "350ml ceramic mug with ergonomic handle, microwave safe.",
+    "price": 12.99,
+    "category": "Kitchen",
+    "stock": 60
+  },
+  {
+    "name": "LED Desk Lamp",
+    "description": "Adjustable LED lamp with touch control and USB charging port.",
+    "price": 34.99,
+    "category": "Home",
+    "stock": 35
+  }
+]
