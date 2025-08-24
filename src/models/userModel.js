@@ -13,10 +13,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "please enter your email"],
       unique: true,
       lowercase: true,
-      validate: {
-        validator: (v) => /[^@\s]+@[^@\s]+\.[^@\s]+/.test(v),
-        message: "please provide a valid email",
-      },
+
       index: true,
     },
     password: {

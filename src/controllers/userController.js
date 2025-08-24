@@ -1,6 +1,7 @@
 import { userModel } from "./../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { sendMail } from "../utils/sendEmail.js";
 
 const signToken = (payload) => {
   if (!process.env.JWT_SECRET) {
@@ -35,12 +36,14 @@ const registerUser = async (req, res) => {
 
     const token = signToken({ userId: user._id });
 
+    await sendMail(email);
     res.status(201).json({
-      message: "User registered successfully",
+      message: "User registered successfully, Please verify your email",
       token,
       user: { id: user._id, email: user.email, name: user.name },
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -53,23 +56,25 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-  const user = await userModel.findOne({ email: email }).select("+password");
+    const user = await userModel
+      .findOne({ email: email })
+      .select("+password isConfirmed");
 
     if (!user)
-      return res
-        .status(401)
-        .json({ message: "invalid email or password" });
+      return res.status(401).json({ message: "invalid email or password" });
 
     const matched = await bcrypt.compare(password, user.password);
     if (!matched)
-      return res
-        .status(401)
-        .json({ message: "invalid email or password" });
+      return res.status(401).json({ message: "invalid email or password" });
 
     const token = signToken({ userId: user._id });
-
+    let messageToBeSent = "login successful";
+    if (!user.isConfirmed) {
+      messageToBeSent += ",Please verify your email";
+      sendMail(email);
+    }
     res.status(200).json({
-      message: "login successful",
+      message: messageToBeSent,
       token,
       user: { id: user._id, email: user.email, name: user.name },
     });
@@ -81,4 +86,25 @@ const loginUser = async (req, res) => {
 const getProfile = async (req, res) => {
   res.status(200).json(req.user);
 };
-export { registerUser, loginUser, getProfile };
+
+const verifyAccount = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const v = jwt.verify(email, process.env.JWT_SECRET);
+    if (v) {
+      const email = v.email;
+      const user = await userModel
+        .findOne({ email: email })
+        .select("+password isConfirmed");
+
+      user.isConfirmed = true;
+      await user.save();
+      res.json({
+        message: "verified successfully",
+      });
+    }
+  } catch (error) {
+    console.error("Token not valid:", err.message);
+  }
+};
+export { registerUser, loginUser, getProfile, verifyAccount };
