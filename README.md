@@ -1,7 +1,5 @@
 # E-commerce API (Node.js + Express + Mongoose)
 
-Minimal README describing the project structure and available endpoints.
-
 ## Quick start
 
 - Requirements: Node.js 18+ and a MongoDB Atlas connection string
