@@ -1,4 +1,6 @@
 # E-commerce API (Node.js + Express + Mongoose)
+E‑commerce REST API built with Node.js, Express, and MongoDB (Mongoose). It provides JWT authentication with email verification, role‑based access (user/admin), product catalog CRUD, a persistent shopping cart, and order creation from the cart with transactional stock updates. The codebase follows a clear controller/router/model structure, uses environment‑based configuration, and supports email delivery via Nodemailer (Gmail App Password in prod or Ethereal in dev). Suitable as a clean starter backend for storefronts, admin dashboards, or integrations.
+
 
 ## Quick start
 
