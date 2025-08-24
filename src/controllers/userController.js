@@ -87,6 +87,31 @@ const getProfile = async (req, res) => {
   res.status(200).json(req.user);
 };
 
+const deleteAccount = async (req, res) => {
+  try {
+    let emailToBeDeleted = (req.body?.email || req.user.email || "")
+      .toLowerCase()
+      .trim();
+    if (!emailToBeDeleted) {
+      return res.status(400).json({ message: "email is required" });
+    }
+
+    // If attempting to delete someone else, require admin
+    const isSelf = emailToBeDeleted === (req.user.email || "").toLowerCase();
+    if (!isSelf && req.user.role !== "admin") {
+      return res.status(401).json({ message: "unauthorized behaviour" });
+    }
+
+    const target = await userModel.findOne({ email: emailToBeDeleted });
+    if (!target) return res.status(404).json({ message: "User not found" });
+
+    await userModel.deleteOne({ _id: target._id });
+    return res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 const verifyAccount = async (req, res) => {
   try {
     const email = req.params.email;
@@ -104,7 +129,7 @@ const verifyAccount = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Token not valid:", err.message);
+    console.error("Token not valid:", error.message);
   }
 };
-export { registerUser, loginUser, getProfile, verifyAccount };
+export { registerUser, loginUser, getProfile, verifyAccount, deleteAccount };

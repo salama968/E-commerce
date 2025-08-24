@@ -163,7 +163,7 @@ class="t20"
   style="overflow:hidden;background-color:#0057FF;text-align:center;line-height:40px;mso-line-height-rule:exactly;mso-text-raise:8px;border-radius:8px 8px 8px 8px;"><a class="t17"
   
   
-  href="http://localhost:3000/api/v1/verifyAccount/${token}" 
+  href="http://localhost:3000/api/v1/verify/${token}" 
    
    
    style="display:block;margin:0;Margin:0;font-family:Inter,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:40px;font-weight:700;font-style:normal;font-size:15px;text-decoration:none;letter-spacing:-0.5px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:8px;" target="_blank">
