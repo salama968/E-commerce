@@ -35,7 +35,7 @@ const getProductById = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, category } = req.body;
+    const { name, description, price, stock, category, image } = req.body;
     if (!name || !description || price == null || stock == null || !category) {
       return res.status(400).json({ message: "Missing required fields" });
     }
@@ -46,6 +46,7 @@ const addProduct = async (req, res) => {
       price,
       stock,
       category,
+      image,
     });
     const createdProduct = await product.save();
     res.status(201).json({
@@ -72,6 +73,7 @@ const updateProduct = async (req, res) => {
     product.price = req.body.price || product.price;
     product.stock = req.body.stock || product.stock;
     product.category = req.body.category || product.category;
+    product.image = req.body.image || product.image;
 
     const updateProduct = await product.save();
     res.status(200).json({

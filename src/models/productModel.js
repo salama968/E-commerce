@@ -20,6 +20,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "please enter product category"],
     },
+    image: {
+      type: String,
+      trim: true,
+    },
     stock: {
       type: Number,
       required: [true, "please enter product quantity"],

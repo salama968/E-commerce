@@ -17,7 +17,7 @@ const createOrderFromCart = async (req, res) => {
 
     const user = await userModel
       .findById(req.user._id)
-      .populate({ path: "cart.product", select: "price stock name" });
+      .populate({ path: "cart.product", select: "price stock name image" });
     if (!user) return res.status(404).json({ message: "User not found" });
     if (!user.cart || user.cart.length === 0)
       return res.status(400).json({ message: "Cart is empty" });
@@ -98,7 +98,7 @@ const listOrders = async (req, res) => {
     const orders = await orderModel
       .find(filter)
       .sort({ createdAt: -1 })
-      .populate({ path: "items.product", select: "name price" })
+      .populate({ path: "items.product", select: "name price image" })
       .lean();
     return res.status(200).json({ orders });
   } catch (err) {
@@ -113,7 +113,7 @@ const getOrderById = async (req, res) => {
       return res.status(400).json({ message: "Invalid id" });
     const order = await orderModel
       .findById(id)
-      .populate({ path: "items.product", select: "name price" });
+      .populate({ path: "items.product", select: "name price image" });
     if (!order) return res.status(404).json({ message: "Order not found" });
     const isOwner = order.user.toString() === req.user._id.toString();
     const isAdmin = req.user.role === "admin";

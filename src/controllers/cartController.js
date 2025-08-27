@@ -19,7 +19,10 @@ const getCart = async (req, res) => {
   try {
     const populated = await userModel
       .findById(req.user._id)
-      .populate({ path: "cart.product", select: "name price stock category" })
+      .populate({
+        path: "cart.product",
+        select: "name price stock category image",
+      })
       .lean();
     if (!populated) return res.status(404).json({ message: "User not found" });
     const cart = buildCartResponse(populated);
@@ -71,7 +74,10 @@ const addToCart = async (req, res) => {
 
     const populated = await userModel
       .findById(user._id)
-      .populate({ path: "cart.product", select: "name price stock category" })
+      .populate({
+        path: "cart.product",
+        select: "name price stock category image",
+      })
       .lean();
     return res.status(200).json(buildCartResponse(populated));
   } catch (error) {
@@ -120,7 +126,10 @@ const updateQuantity = async (req, res) => {
 
     const populated = await userModel
       .findById(user._id)
-      .populate({ path: "cart.product", select: "name price stock category" })
+      .populate({
+        path: "cart.product",
+        select: "name price stock category image",
+      })
       .lean();
     return res.status(200).json(buildCartResponse(populated));
   } catch (error) {
