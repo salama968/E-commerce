@@ -112,6 +112,19 @@ const deleteAccount = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find().select("-password");
+    res.status(200).json({
+      message: "All users retrieved successfully",
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const verifyAccount = async (req, res) => {
   try {
     const email = req.params.email;
@@ -132,4 +145,11 @@ const verifyAccount = async (req, res) => {
     console.error("Token not valid:", error.message);
   }
 };
-export { registerUser, loginUser, getProfile, verifyAccount, deleteAccount };
+export {
+  registerUser,
+  loginUser,
+  getProfile,
+  verifyAccount,
+  deleteAccount,
+  getAllUsers,
+};
