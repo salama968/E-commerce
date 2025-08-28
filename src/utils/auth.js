@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const user = await userModel
       .findById(payload.userId)
-      .select("_id name email role");
+      .select("_id name email role isConfirmed");
     if (!user) return res.status(401).json({ message: "Unauthorized" });
     req.user = user;
     next();
